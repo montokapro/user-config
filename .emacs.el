@@ -4,8 +4,13 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-;; remap M-x
+;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-r") 'helm-mini)
+(setq helm-split-window-in-side-p t) ; open helm buffer inside current window, not occupy whole other window
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 ;; switch between windows with shift and arrows
 (when (fboundp 'windmove-default-keybindings)
@@ -33,7 +38,7 @@
 ;; remember recent files
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 ;; reload externally modified files
 (global-auto-revert-mode t)
