@@ -7,8 +7,8 @@
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-r") 'helm-mini)
-(setq helm-split-window-in-side-p t) ; open helm buffer inside current window, not occupy whole other window
+(global-set-key (kbd "C-x C-b") 'helm-mini)
+(setq helm-split-window-in-side-p t) ; open helm buffer inside current window
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
@@ -24,6 +24,14 @@
 
 ;; highlight matching parenthesises
 (show-paren-mode 1)
+
+;; highlight long lines
+(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode t)
+
+;; show column number in status bar
+(setq column-number-mode t)
 
 ;; dim unfocused buffers
 (dimmer-mode)
