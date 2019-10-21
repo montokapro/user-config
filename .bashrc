@@ -48,3 +48,6 @@ export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 # gpg
 GPG_TTY=$(tty)
 export GPG_TTY
+
+# editor
+EDITOR="emacs -nw"
