@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ln -rs .bash_profile $HOME/.bash_profile
 ln -rs .bashrc $HOME/.bashrc

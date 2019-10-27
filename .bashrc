@@ -50,4 +50,4 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 # editor
-EDITOR="emacs -nw"
+export EDITOR="emacs -nw"
