@@ -1,16 +1,16 @@
 ;; package repos
-(require 'package) 
+(require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-b") 'helm-mini)
 (setq helm-split-window-in-side-p t) ; open helm buffer inside current window
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; switch between windows with shift and arrows
 (when (fboundp 'windmove-default-keybindings)
@@ -53,6 +53,9 @@
 
 ;; link to github
 (require 'browse-at-remote)
+
+;; structural editing
+(require 'smartparens-config)
 
 ;; cedille
 (require 'cedille-mode)
