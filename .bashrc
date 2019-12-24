@@ -45,6 +45,9 @@ HISTFILESIZE=2000000
 export GUIX_PROFILE=$HOME/.guix-profile
 export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 
+# nix
+export PATH=$PATH:/nix/var/nix/profiles/default/bin
+
 # gpg
 GPG_TTY=$(tty)
 export GPG_TTY
