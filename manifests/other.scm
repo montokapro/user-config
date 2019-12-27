@@ -1,0 +1,1 @@
+(specifications->manifest '("vim" "autoconf" "automake" "gettext" "texinfo" "pkg-config" "keepassxc" "gnupg" "nfs-utils" "hexchat" "cedille" "gtksourceview" "racket" "emacs-geiser" "emacs-guix" "emacs-racket-mode" "libreoffice" "inkscape" "icecat"))
