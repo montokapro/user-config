@@ -1,9 +1,3 @@
-;; package repos
-(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-(package-initialize)
-
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-split-window-in-side-p t) ; open helm buffer inside current window
@@ -34,8 +28,9 @@
 (setq column-number-mode t)
 
 ;; dim unfocused buffers
-(dimmer-mode)
-(setq dimmer-fraction 0.25)
+(when (require 'dimmer nil t)
+  (dimmer-mode)
+  (setq dimmer-fraction 0.325))
 
 ;; move backup files
 (setq backup-directory-alist
@@ -52,13 +47,13 @@
 (global-auto-revert-mode t)
 
 ;; link to github
-(require 'browse-at-remote)
+(require 'browse-at-remote nil t)
 
 ;; structural editing
-(require 'smartparens-config)
+(require 'smartparens-config nil t)
 
 ;; cedille
-(require 'cedille-mode)
+(require 'cedille-mode nil t)
 
 (defun close-all-buffers ()
   (interactive)
