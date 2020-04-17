@@ -55,6 +55,62 @@
 ;; cedille
 (require 'cedille-mode nil t)
 
+;; scala
+(when (require 'sbt-mode nil t)
+  (use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)))
+
+;; sbt
+(when (require 'scala-mode nil t)
+  (use-package scala-mode
+    :mode "\\.s\\(cala\\|bt\\)$"))
+
+;; Enable nice rendering of diagnostics like compile errors.
+(when (require 'flycheck nil t)
+  (use-package flycheck
+    :init (global-flycheck-mode)))
+
+(when (require 'lsp-mode nil t)
+  (use-package lsp-mode
+    ;; Optional - enable lsp-mode automatically in scala files
+    :hook  (scala-mode . lsp)
+    (lsp-mode . lsp-lens-mode)
+    :config (setq lsp-prefer-flymake nil)))
+
+;; Enable nice rendering of documentation on hover
+(require 'lsp-ui nil t)
+
+;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
+;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
+;;   to avoid odd behavior with snippets and indentation
+(require 'yasnippet nil t)
+
+;; Add company-lsp backend for metals
+(require 'company-lsp nil t)
+
+;; Use the Tree View Protocol for viewing the project structure and triggering compilation 
+(when (require 'lsp-treemacs nil t)
+  (use-package lsp-treemacs
+    :config
+    (lsp-metals-treeview-enable t)
+    (setq lsp-metals-treeview-show-when-views-received t)))
+
+;; guix
+(with-eval-after-load 'geiser-guile
+  (add-to-list 'geiser-guile-load-path "~/code/guix/guix"))
+(when (require 'yasnippet nil t)
+  (with-eval-after-load 'yasnippet
+    (add-to-list 'yas-snippet-dirs "~/code/guix/guix/etc/snippets"))
+  (setq user-full-name "Stephen Webber")
+  (setq user-mail-address "montokapro@gmail.com")
+  (load-file "~/code/guix/guix/etc/copyright.el"))
+
 (defun close-all-buffers ()
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
@@ -76,7 +132,8 @@
    (quote
     ((eval modify-syntax-entry 43 "'")
      (eval modify-syntax-entry 36 "'")
-     (eval modify-syntax-entry 126 "'")))))
+     (eval modify-syntax-entry 126 "'"))))
+ '(sbt:program-name "~/.sdkman/candidates/sbt/current/bin/sbt"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

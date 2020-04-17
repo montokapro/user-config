@@ -41,6 +41,9 @@ shopt -s histappend
 HISTSIZE=1000000
 HISTFILESIZE=2000000
 
+# local bin
+export PATH=$PATH:$HOME/.local/bin
+
 # guix
 export GUIX_PROFILE=$HOME/.guix-profile
 export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
@@ -54,3 +57,7 @@ export GPG_TTY
 
 # editor
 export EDITOR="emacs -nw"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/steve/.sdkman"
+[[ -s "/home/steve/.sdkman/bin/sdkman-init.sh" ]] && source "/home/steve/.sdkman/bin/sdkman-init.sh"
