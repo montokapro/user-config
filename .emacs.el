@@ -1,6 +1,9 @@
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-split-window-in-side-p t) ; open helm buffer inside current window
+
+;; projectile
+(require 'tramp)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (projectile-mode +1)
