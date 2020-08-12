@@ -52,12 +52,18 @@ export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 export PATH=$PATH:/nix/var/nix/profiles/default/bin
 
 # gpg
-GPG_TTY=$(tty)
-export GPG_TTY
+if command -v tty &> /dev/null
+then
+  GPG_TTY=$(tty)
+  export GPG_TTY
+fi
 
 # editor
 export EDITOR="emacs -nw"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/steve/.sdkman"
-[[ -s "/home/steve/.sdkman/bin/sdkman-init.sh" ]] && source "/home/steve/.sdkman/bin/sdkman-init.sh"
+if command -v find &> /dev/null && command -v find &> /dev/null
+then
+  #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+  export SDKMAN_DIR="/home/steve/.sdkman"
+  [[ -s "/home/steve/.sdkman/bin/sdkman-init.sh" ]] && source "/home/steve/.sdkman/bin/sdkman-init.sh"
+fi
