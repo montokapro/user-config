@@ -1,0 +1,19 @@
+# Use Home/End keyboard keys to navigate current line (same as CTRL+A or E), listing all variants for those keys here
+"\e[1~": beginning-of-line          # Home
+"\e[H": beginning-of-line           # Home
+"\eOH": beginning-of-line           # Home
+"\0001": beginning-of-line          # Home
+"\e[4~": end-of-line                # End
+"\e[F": end-of-line                 # End
+"\eOF": end-of-line                 # End
+"\0005": end-of-line                # End
+
+# CTRL+arrows to move from word to word
+"\e[5D": backward-word              # CTRL+left
+"\e[1;4D": backward-word            # CTRL+left
+"\e[1;5D": backward-word            # CTRL+left
+"\eOD": backward-word               # CTRL+left
+"\e[5C": forward-word               # CTRL+right
+"\e[1;4C": forward-word             # CTRL+right
+"\e[1;5C": forward-word             # CTRL+right
+"\eOC": forward-word                # CTRL+right
