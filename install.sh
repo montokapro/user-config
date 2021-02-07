@@ -5,3 +5,4 @@ ln -rs .bashrc $HOME/.bashrc
 ln -rs .inputrc $HOME/.inputrc
 ln -rs .emacs.el $HOME/.emacs.el
 ln -rs .config/guix/channels.scm $HOME/.config/guix/channels.scm
+ln -rs .gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
