@@ -4,8 +4,8 @@
 
 ;; projectile
 (require 'tramp)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
+; (setq projectile-completion-system 'helm)
+; (helm-projectile-on)
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
@@ -54,6 +54,9 @@
 
 ;; structural editing
 (require 'smartparens-config nil t)
+
+;; python
+(setq python-shell-interpreter "python3")
 
 ;; cedille
 (require 'cedille-mode nil t)
@@ -104,15 +107,23 @@
     (lsp-metals-treeview-enable t)
     (setq lsp-metals-treeview-show-when-views-received t)))
 
+;; haskell
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
 ;; guix
 (with-eval-after-load 'geiser-guile
-  (add-to-list 'geiser-guile-load-path "~/code/guix/guix"))
+  (add-to-list 'geiser-guile-load-path "~/code/guix/guix")
+  (add-to-list 'geiser-guile-load-path "~/code/guix/free"))
 (when (require 'yasnippet nil t)
   (with-eval-after-load 'yasnippet
     (add-to-list 'yas-snippet-dirs "~/code/guix/guix/etc/snippets"))
   (setq user-full-name "Stephen Webber")
   (setq user-mail-address "montokapro@gmail.com")
-  (load-file "~/code/guix/guix/etc/copyright.el"))
+  (load-file "~/code/guix/guix/etc/copyright.el")
+  (setq copyright-names-regexp
+    (format "%s <%s>" user-full-name user-mail-address)))
 
 (defun close-all-buffers ()
   (interactive)
@@ -128,14 +139,45 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
  '(package-selected-packages
-   (quote
-    (expand-region avy multiple-cursors magit dimmer helm-projectile projectile browse-at-remote undo-tree cider helm-idris ensime auto-complete)))
+   '(expand-region avy multiple-cursors magit dimmer helm-projectile projectile browse-at-remote undo-tree cider helm-idris ensime auto-complete))
  '(safe-local-variable-values
-   (quote
-    ((eval modify-syntax-entry 43 "'")
+   '((eval let
+	   ((root-dir-unexpanded
+	     (locate-dominating-file default-directory ".dir-locals.el")))
+	   (when root-dir-unexpanded
+	     (let*
+		 ((root-dir
+		   (expand-file-name root-dir-unexpanded))
+		  (root-dir*
+		   (directory-file-name root-dir)))
+	       (unless
+		   (boundp 'geiser-guile-load-path)
+		 (defvar geiser-guile-load-path 'nil))
+	       (make-local-variable 'geiser-guile-load-path)
+	       (require 'cl-lib)
+	       (cl-pushnew root-dir* geiser-guile-load-path :test #'string-equal))))
+     (eval setq-local guix-directory
+	   (locate-dominating-file default-directory ".dir-locals.el"))
+     (encoding . utf-8)
+     (eval let*
+	   ((root-dir
+	     (expand-file-name
+	      (locate-dominating-file default-directory ".dir-locals.el")))
+	    (root-dir*
+	     (directory-file-name root-dir)))
+	   (unless
+	       (boundp 'geiser-guile-load-path)
+	     (defvar geiser-guile-load-path 'nil))
+	   (make-local-variable 'geiser-guile-load-path)
+	   (require 'cl-lib)
+	   (cl-pushnew root-dir* geiser-guile-load-path :test #'string-equal))
+     (eval setq guix-directory
+	   (locate-dominating-file default-directory ".dir-locals.el"))
+     (eval modify-syntax-entry 43 "'")
      (eval modify-syntax-entry 36 "'")
-     (eval modify-syntax-entry 126 "'"))))
+     (eval modify-syntax-entry 126 "'")))
  '(sbt:program-name "~/.sdkman/candidates/sbt/current/bin/sbt"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
