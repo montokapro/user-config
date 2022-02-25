@@ -61,6 +61,10 @@ fi
 # editor
 export EDITOR="emacs -nw"
 
+# ruby
+export PATH=$PATH:$HOME/.rbenv/bin
+eval "$(rbenv init - bash)"
+
 if command -v find &> /dev/null && command -v find &> /dev/null
 then
   #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

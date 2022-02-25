@@ -108,9 +108,9 @@
     (setq lsp-metals-treeview-show-when-views-received t)))
 
 ;; haskell
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(when (require 'haskell-interactive-mode nil t)
+  (require 'haskell-process nil t)
+  (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 ;; guix
 (with-eval-after-load 'geiser-guile
