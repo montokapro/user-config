@@ -1,0 +1,29 @@
+[user]
+	name = Stephen Webber
+	email = montokapro@gmail.com
+	signingkey = 52B4252F254954E9
+[diff]
+	guitool = meld
+[difftool]
+	prompt = false
+[merge]
+	tool = meld
+[mergetool]
+	prompt = false
+[difftool "meld"]
+	trustExitCode = false
+[mergetool "meld"]
+	trustExitCode = false
+[commit]
+	gpgsign = true
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.gmail.com
+	smtpUser = montokapro@gmail.com
+	smtpServerPort = 587
+[core]
+	excludesfile = /home/steve/.gitignore_global
+[init]
+	defaultBranch = main
+[gpg]
+	program = gpg
